@@ -8,8 +8,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
-  constructor(private httpClient: HttpClient){}
-
+  constructor(private httpClient: HttpClient){};
+  plateNum : any;
+  plateConfidence: any;
 
   onFileUpload(event : any){
     const file = event.target.files[0];
@@ -22,7 +23,11 @@ export class AppComponent {
     const formData = new FormData();
     formData.append("file", file);
     const upload$ = this.httpClient.post("http://localhost:3000/", formData);
-    upload$.subscribe();
+    upload$.subscribe((response: any)=>{
+      console.log(response)
+      this.plateNum = response.plate;
+      this.plateConfidence = response.confidence;
+    });
 
   }
 

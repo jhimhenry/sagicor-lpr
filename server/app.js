@@ -40,7 +40,11 @@ app.post('/', upload.single('file'), async (req, res) => {
   if(!plateData) return res.status(400).send("Error parsing plate!")
 
   console.log(plateData)
-  return res.status(200).send('Success')
+  return res.status(200).send(plateData)
+})
+
+app.get('/', (req, res) => {
+  res.send("hello world");
 })
 
 app.listen(PORT, () => {
