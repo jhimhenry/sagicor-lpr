@@ -1,0 +1,63 @@
+h1{
+  font-weight: bold;
+  text-align: center;
+}
+
+form{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  margin: 5rem;
+}
+
+.center{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.main{
+  flex-direction: column;
+}
+
+.data-container{
+  width: 20%;
+  flex-direction: column;
+}
+
+.plate-value{
+  font-weight: bold;
+  font-size: 5rem;
+  text-align: center;
+  color: #26a69a;
+}
+
+.annotation{
+  font-weight: bold;
+  font-size: 1.5rem;
+  margin-right: 10px;
+  text-align: center;
+}
+
+.plate-confidence{
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: #686868;
+}
+
+.plate-label{
+  display:flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+
+.plate-error{
+  font-weight: bold;
+  text-align: center;
+  font-size: 1.25rem;
+  color: #9b0500;
+}

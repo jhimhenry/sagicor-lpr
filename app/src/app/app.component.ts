@@ -9,8 +9,12 @@ import { Component } from '@angular/core';
 export class AppComponent {
 
   constructor(private httpClient: HttpClient){};
+  title = 'sagicor-lpr'
   plateNum : any;
   plateConfidence: any;
+  displayElement = false;
+  displayError = false;
+  progress: number = 0;
 
   onFileUpload(event : any){
     const file = event.target.files[0];
@@ -23,10 +27,17 @@ export class AppComponent {
     const formData = new FormData();
     formData.append("file", file);
     const upload$ = this.httpClient.post("http://localhost:3000/", formData);
-    upload$.subscribe((response: any)=>{
-      console.log(response)
-      this.plateNum = response.plate;
-      this.plateConfidence = response.confidence;
+    upload$.subscribe({
+      next: (res: any)=>{
+        console.log(res);
+        if(res.plate) this.displayElement = true;
+        this.plateNum = res.plate;
+        this.plateConfidence = res.confidence.toFixed(2);
+      },
+      error: (error)=>{
+        this.displayError = true
+        console.log(error)
+      }
     });
 
   }

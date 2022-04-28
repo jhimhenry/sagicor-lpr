@@ -1,7 +1,28 @@
 <h1>License Plate Search</h1>
 
-<input type="file" (change)="onFileUpload($event)">
-<div>Plate: {{plateNum}}</div>
-<div>Confidence: {{plateConfidence}}</div>
+<div class="main center">
+  <form>
+    <input style="display: none" type="file" (change)="onFileUpload($event)" accept="image/png, image/jpeg" #hiddenfileinput>
+    <button (click)="hiddenfileinput.click()"  class="waves-effect waves-light btn"><i class="material-icons left">cloud</i>Upload File</button>
+    <!-- Progress Bar -->
+    <div class="progress form-group" *ngIf="progress > 0">
+      <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [style.width.%]="progress"></div>
+    </div>
+  </form>
+
+  <div *ngIf="displayElement" class="data-container center">
+    <div class="plate-label">
+      <p class="annotation">Pridicted Plate</p>
+      <p class="plate-data plate-confidence">{{plateConfidence}}%</p>
+    </div>
+    <p class="plate-data plate-value">{{plateNum}}</p>
+  </div>
+
+  <div *ngIf="displayError" class="plate-error">
+    <p>The uploaded image does not appear to contain a license plate</p>
+  </div>
+
+</div>
+
 
 
