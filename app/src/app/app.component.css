@@ -1,4 +1,5 @@
 h1{
+  margin: 1rem;
   font-weight: bold;
   text-align: center;
 }
@@ -7,7 +8,7 @@ form{
   display:flex;
   align-items: center;
   justify-content: center;
-  margin: 5rem;
+  margin-top: 3rem;
 }
 
 .center{
@@ -19,14 +20,17 @@ form{
 
 .main{
   flex-direction: column;
+  overflow: hidden;
 }
 
 .data-container{
+  margin: 0;
   width: 20%;
   flex-direction: column;
 }
 
 .plate-value{
+  margin: 0;
   font-weight: bold;
   font-size: 5rem;
   text-align: center;
@@ -60,4 +64,15 @@ form{
   text-align: center;
   font-size: 1.25rem;
   color: #9b0500;
+}
+
+.image-container{
+  height:300px;
+  width: 300px;
+}
+
+img{
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
 }

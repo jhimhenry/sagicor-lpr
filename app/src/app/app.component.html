@@ -10,6 +10,10 @@
     </div>
   </form>
 
+  <div class="image-container center">
+    <img [src]="url" *ngIf="url">
+  </div>
+
   <div *ngIf="displayElement" class="data-container center">
     <div class="plate-label">
       <p class="annotation">Pridicted Plate</p>
