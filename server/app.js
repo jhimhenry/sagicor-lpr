@@ -7,6 +7,9 @@ const {uploadFile} = require('./s3Client')
 const cors = require('cors')
 const PORT = process.env.PORT
 let app = express();
+const mongodb = require('mongodb');
+const MongoClient = mongodb.MongoClient;
+const connection = 'mongodb://127.0.0.1:27017'; 
 
 app.use(cors({ origin: '*'}));
 
@@ -17,6 +20,7 @@ async function sendImageOpenalpr(imgUrl){
   try{
     const response = await axios.post(url);
     let plateData = response.data.results[0];
+    addToDb(plateData);
     return plateData;
   }catch(err){
     console.log(err);
@@ -45,8 +49,28 @@ app.post('/', upload.single('file'), async (req, res) => {
 
 app.get('/', (req, res) => {
   res.send("hello world");
+ 
 })
 
 app.listen(PORT, () => {
   console.log(`Example app listening at http://localhost:${PORT}`);
 })
+  
+function addToDb(plateData){
+  MongoClient.connect(
+    connection,
+    { useNewUrlParser: true },
+    (error, client) => {
+      if (error) {
+        return console.log('unable to connect to database');
+      }
+  
+      const db = client.db("License_Plate_Recognition");
+  
+      db.collection('License_Plate_Data').insertOne({
+        Plate_Data: plateData,
+        Date: new Date()
+      });
+    }
+  );
+}
